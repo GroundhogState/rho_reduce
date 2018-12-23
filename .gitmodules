@@ -1,0 +1,3 @@
+[submodule "QETLAB"]
+	path = QETLAB
+	url = https://github.com/nathanieljohnston/QETLAB
