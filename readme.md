@@ -2,6 +2,13 @@
 
 Various algorithms for fast computation of partial trace operations, and benchmarks thereof.
 
+TODO
+* Python port
+* C++ port
+* Recursive method
+* Benchmarks
+* Integration
+
 ## Getting Started
 
 ### Prerequisites
