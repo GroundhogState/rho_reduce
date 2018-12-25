@@ -164,4 +164,3 @@ function [rho,dim_out] = right_trace(rho,dim,left_keep,dim_out,dim_right)
 end
 
 
-end
