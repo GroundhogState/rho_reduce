@@ -9,10 +9,21 @@
 % zero-cost commands reshape and permute, and calling LAPACK to compute the
 % linear algebra.
 
-fprintf('=====Some examples of tracing=====\n')
+fprintf('======== Some examples of tracing ========\n')
 
-% Tracing B out of qubits ABC returns a density matrix for the reduced
-% states of AC.
+
+
+fprintf('\n==============================================\n')
+fprintf('Retrieving the reduced states of each of two qubits in an entangled state')
+Psi = [1 1/sqrt(2) 0 1/sqrt(2)]; % toDM normalizes automatically 
+Rho = toDM(Psi/norm(Psi))
+fprintf('\n\nThe reduced states are:\n')
+psi1 = TrX(Rho,2,[2,2])
+psi2 = TrX(Rho,1,[2,2])
+
+
+fprintf('\n==============================================\n')
+fprintf(' Tracing B out of ABC returns a density matrix for the reduced'states of AC.
 % For a product of pure states:
 A = rand_qubit();
 B = rand_qubit();
@@ -21,20 +32,10 @@ ABC = Tensor(A,B,C);
 fprintf('ABC is %u x %u, with trace %u\n',size(ABC),trace(ABC))
 AC = TrX(ABC,2,[2,2,2])
 % Trace out A and get density matrix for C back
-C_red = TrX(AC,1,[2,2])
+C_reduced = TrX(AC,1,[2,2])
+fprintf('\n ||C_reduced-C|| = %e \n',norm(C_reduced-C))
 
-fprintf(['\n\nRetrieving the density matrix of a qubit from the product of\n',...
-        'a 2 and 3-level system\n'])
-D = rand_qubit();
-E = toDM(normalize(exp(2j*pi*rand(3,1))));
-DE = Tensor(D,E);
-fprintf('DE is %u x %u with trace %u \n',size(DE),trace(DE))
-TrX_E_DE= TrX(DE,2,[2,3])
 
-% Retrieving the state of each of two three-level systems with a globally
-% pure state
-R = toDM(normalize(exp(2j*pi*randn(9,1))));
-fprintf('R is %u x %u, with trace %u\n',size(R),trace(R))
-P = TrX(R,2,[3,3]);
-fprintf('P = Tr_Q (R) is %u x %u, with trace %u \n',size(P),trace(P))
+
+
 

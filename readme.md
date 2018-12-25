@@ -31,11 +31,11 @@ See [TrC_examples.m](lib\MATLAB\TrX_examples.m) for examples in MATLAB syntax.
 ## About
 See for Jonas Maziero's [paper](https://arxiv.org/abs/1609.00323) (\doc\mazerio_computing_partial_traces.pdf) which describes the implementation in ptrace.m.
 
-The function TrX(rho,sys,dim) accepts the density matrix (rho) of a multipartite system with N elements each with dimension d_i, i=1:N. The total Hilbert space has therefore prod(d_i,i=1:N) dimensions. The function computes the trace 'over'  the systems specified by index in (sys), and returns a density matrix of the remaning systems ~(idx \cap sys). The vector (dim) specifies the dimensions, as required for the permutation of the density matrix into a product of non-square matrices, reducing the partial trace to partial inner product. This executes quickly in MATLAB because of the zero-cost commands reshape and permute, and calling LAPACK to compute the linear algebra.
+The function TrX(rho,sys,dim) accepts the density matrix (rho) of a multipartite system with N elements each with dimension d_i, i=1:N. The total Hilbert space has therefore prod(d_i,i=1:N) dimensions. The function computes the trace 'over'  the systems specified by index in (sys), and returns a density matrix of the remaning systems ~(idx \cap sys). The vector (dim) specifies the dimensions, as required for the permutation of the density matrix into a product of non-square matrices, reducing the partial trace to partial inner product. 
 
 The function ptrace(rho,sys,dim) performs the same operation, but does so by computing the reduced state one matrix element at a time. Each element is produced in (I suspect) the optimal number of operations for promise-free well-conditioned matrices. It looks suspiciously vectorizable, and easily parallelized.
 
-In the end, Toby's vectorized code beats my implementation of the iterative algorithm that Jonas describes. Todo: fix visual demo
+In the end, Toby's vectorized code beats my implementation of the iterative algorithm that Jonas describes. Toby's executes quickly in MATLAB because of the zero-cost commands reshape and permute, and calling LAPACK to compute the linear algebra. Todo: fix visual demo
 
 However, there are many fewer operations in the iterative algorithm.
 
