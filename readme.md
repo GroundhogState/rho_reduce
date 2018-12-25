@@ -22,7 +22,7 @@ git submodule update --recursive --remote
 ```
 ## Running the tests
 
-See [TrC_examples.m](lib\MATLAB\TrX_examples.m) for examples in MATLAB syntax.
+See [TrC_examples.m](lib/MATLAB/TrX_examples.m) for examples in MATLAB syntax.
 
 ## Usage
 
