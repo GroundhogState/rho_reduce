@@ -24,7 +24,7 @@ git submodule update --recursive --remote
 
 See [`TrC_examples.m`](lib/MATLAB/TrX_examples.m) linkfor examples in MATLAB syntax.
 
-The alternative function `ptrace()` will allow the same syntax.
+The alternative function [`ptrace()`](lib/MATLAB/ptrace.m) will allow the same syntax.
 
 The two methods are compared in [`ptrace_vs_TrX.m`](https://github.com/GroundhogState/rho_reduce/blob/master/doc/fig/trace_time_matlab.png), with MATLAB results
 
