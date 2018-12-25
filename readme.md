@@ -26,7 +26,7 @@ See [`TrC_examples.m`](lib/MATLAB/TrX_examples.m) linkfor examples in MATLAB syn
 
 The alternative function `ptrace()` will allow the same syntax.
 
-The two methods are compared in [`ptrace_vs_TrX.m`](\lib\MATLAB\ptrace_vs_TrX.m), with results
+The two methods are compared in [`ptrace_vs_TrX.m`](https://github.com/GroundhogState/rho_reduce/blob/master/doc/fig/trace_time_matlab.png), with results
 
 ![](\doc\fig\trace_time_matlab.png)
 
