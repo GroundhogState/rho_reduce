@@ -19,15 +19,18 @@ def ptr(state,n,modes):
 print('====== Some examples of pythonic tracing')
 print('== Retrieving the reduced states of an entangled qubit pair:')
 print('==   Reshape-and-sum method.')
-psi = np.array([1,1/np.sqrt(2),0,1/np.sqrt(2)])
+#psi = np.array([0,1/np.sqrt(2),1,1/np.sqrt(2)])
+psi = [1, 1/np.sqrt(2), 0, 1/np.sqrt(2),1, 0.5,0,1]
 rho = qi.toDM(psi)
-dim = [2,2]
+dim = [2,2,2]
+sys = [2]
 # Reshape into the form dim_keep, dim_traceout
 # Trace out the SECOND system and get the FIRST back
-rho_reshaped = np.reshape(rho,(dim[1],(np.prod(dim)**2)//dim[1]))
-rho_reduced = np.dot(rho_reshaped,qi.dagger(rho_reshaped))
-print(rho_reduced)
+#rho_reshaped = np.reshape(rho,(dim[1],(np.prod(dim)**2)//dim[1]))
+#rho_reduced = np.dot(rho_reshaped,qi.dagger(rho_reshaped))
+#print(rho_reduced)
 
+print(qi.pytrace(rho,sys,dim))
 
 
 
