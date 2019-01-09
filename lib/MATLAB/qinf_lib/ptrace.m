@@ -1,7 +1,7 @@
 function rho = ptrace(rho,sys,dim)
 
 % A partial trace function.
-% Accepts one density matrix or state vector,  an array of dimensions of the subsystems, 
+% Accepts one density matrix or state vector,  an array of dimensions of the subsystems,
 %       and an array of subsystems to trace out.
 %
 % Outputs the reduced density matrix obtained by tracing out the specified
@@ -16,23 +16,14 @@ function rho = ptrace(rho,sys,dim)
 %       See also https://arxiv.org/abs/1601.07458
 %       Published in International Journal of Modern Physics CVol. 28, No. 01, 1750005 (2017)
 
-% EXAMPLE
-% q1 = 0.5*ones(2);
-% q2 = 0.5*[[1,-1i],[1i,1]];
-% q3 = [[1 0],[0,0]];
-% q4 = qubit([1,0,0]);
-% Q = [q1,q2,q3,q4];
-% dim = [2 2 2 2];
-% rho = Tensor(q1,q2,q3, q4);
-% sys = [1 3 4];
 
 % Possible optimizations:
 %   - Trace out contiguous blocks internally if that buys any time
 %   - Convert to a general expression that reduces matrix in a single loop
-%   - Sort subsystems by size and trace out the large ones first 
+%   - Sort subsystems by size and trace out the large ones first
 %   - Replace MATLAB functions with smarter loops if more efficient
 %   - If you have absolute confidence in your inputs, remove the
-%       preconditioning steps to reduce total complexity. 
+%       preconditioning steps to reduce total complexity.
 
 %% Preconditioning
 % if any(size(rho)) == 1
@@ -62,7 +53,7 @@ dim_right = prod(dim(right_keep+1:end));    % The dimension that will be traced 
 
 %% Function body
 % A small optimization: If there is a large contiguous block on either end,
-% trace over the largest first to reduce loop lengths later. 
+% trace over the largest first to reduce loop lengths later.
 % Relegated to functions for readability & they're only called once.
 if dim_left >= dim_right && left_keep > 1
     % Trace left first
@@ -122,7 +113,7 @@ for k=left_keep+1:right_keep-1
         dim_out = dim_out/d_mid;
         d_low = prod(dim(k+1:right_keep));
         rho_mid = zeros(dim_out);
-        for i=1:dim_out 
+        for i=1:dim_out
             for j=1:dim_out
                 ii = mod(i-1,d_low) + floor((i-1)/d_low)*d_mid*d_low;
                 jj = mod(j-1,d_low) + floor((j-1)/d_low)*d_mid*d_low;
@@ -162,5 +153,3 @@ function [rho,dim_out] = right_trace(rho,dim,left_keep,dim_out,dim_right)
         end
         rho = rho_right;
 end
-
-
