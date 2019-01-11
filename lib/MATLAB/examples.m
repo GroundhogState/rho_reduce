@@ -38,6 +38,35 @@ C_reduced = ptrace(AC,1,[2,2])
 fprintf('\n ||C_reduced-C|| = %e \n',norm(C_reduced-C))
 
 
+fprintf('======== Some examples of tracing  with TrX ========\n')
+
+
+
+fprintf('\n==============================================\n')
+fprintf('Retrieving the reduced states of each of two qubits in an entangled state')
+Psi = [1 1/sqrt(2) 0 1/sqrt(2)]; % toDM normalizes automatically 
+Rho = toDM(Psi/norm(Psi))
+fprintf('\n\nThe reduced states are:\n')
+psi1 = TrX(Rho,2,[2,2])
+psi2 = TrX(Rho,1,[2,2])
+
+
+fprintf('\n==============================================\n')
+fprintf(['Tracing B out of a product of pure states ABC returns\n',...,
+    '   a density matrix for the reduced states of AC\n'])
+% For a product of pure states:
+A = rand_qubit();
+B = rand_qubit();
+C = rand_qubit();
+ABC = Tensor(A,B,C);
+
+fprintf('ABC is %u x %u, with trace %u \n',size(ABC),trace(ABC))
+AC = TrX(ABC,2,[2,2,2])
+fprintf('Trace out A and get density matrix for C back')
+C_reduced = TrX(AC,1,[2,2])
+fprintf('\n ||C_reduced-C|| = %e \n',norm(C_reduced-C))
+
+
 
 
 
