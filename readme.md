@@ -1,6 +1,8 @@
 # rho_reduce
 
-Various algorithms for fast computation of partial trace operations, and benchmarks thereof.
+**Purpose**: Testing algorithms for fast computation of partial trace operations, and benchmarks thereof.
+
+**Outcome**: Partial traces are expensive. Extensive tensor reshaping is unavoidable in the mathematically elegant solution. Implementing a more complex algorithm involves fewer floating point operations, but fails to take advantage of hardware acceleration for linear algebra. If you need to repeatedly compute partial traces of a large tensor,  doing so recursively can be very advantageous. I suspect there may be another, potentially large, speedup, that takes advantage of the best of both worlds.
 
 
 ## Getting Started
@@ -30,7 +32,7 @@ The two methods are compared in [`ptrace_vs_TrX.m`](https://github.com/Groundhog
 
 ![trace_profile](/doc/fig/trace_time_matlab.png)
 
-From my i7 (spec)
+From my i7 quad-core in factory standard HP Probook 360.
 
 ## Usage
 
@@ -43,12 +45,9 @@ The function TrX(rho,sys,dim) accepts the density matrix (rho) of a multipartite
 
 The function ptrace(rho,sys,dim) performs the same operation, but does so by computing the reduced state one matrix element at a time. Each element is produced in (I suspect) the optimal number of operations for promise-free well-conditioned matrices. It looks suspiciously vectorizable, and easily parallelized.
 
-In the end, Toby's vectorized code beats my implementation of the iterative algorithm that Jonas describes. Toby's executes quickly in MATLAB because of the zero-cost commands reshape and permute, and calling LAPACK to compute the linear algebra. Todo: fix visual demo
+In the end, Toby's vectorized code beats my implementation of the iterative algorithm that Jonas describes. Toby's executes quickly in MATLAB because of the zero-cost commands reshape and permute, and calling LAPACK to compute the linear algebra. 
 
 However, there are many fewer operations in the iterative algorithm.
-
-QETLAB has useful functions but may not be maintained any more. Could easily rewrite functions.
-Currently, will just be useful for benchmarks in MATLAB.
 
 
 ## Built With
